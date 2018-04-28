@@ -18,10 +18,10 @@
 			}
 		},
 		methods: {
-			setCanvas(){
+			setCanvas() {
 				let ctx = this.$refs.canvas.getContext('2d');
-				ctx.clearRect(0,0,this.width,this.height);
-				ctx.fillStyle="#fff";
+				ctx.clearRect(0, 0, this.width, this.height);
+				ctx.fillStyle = "rgba(255,255,255,0.5)";
 				let ndots = [this.area].concat(this.dots);
 				this.dots.forEach((dot) => {
 					
@@ -34,7 +34,7 @@
 					dot.ya *= (dot.y > this.height || dot.y < 0) ? -1 : 1;
 					
 					// 绘制点
-					ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 2, 2);
+					ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 3, 3);
 					
 					// 循环比对粒子间的距离
 					for (let i = 0; i < ndots.length; i++) {
@@ -78,11 +78,11 @@
 				});
 				
 			},
-			resize(){
+			resize() {
 				this.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				this.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
 			},
-			mousemove(){
+			mousemove() {
 				window.onmousemove = (e) => {
 					e = e || window.event;
 					this.area.x = e.clientX;
@@ -93,8 +93,8 @@
 					this.area.y = null
 				}
 			},
-			setParticle(){
-				for (let i = 0; i < 100; i++){
+			setParticle() {
+				for (let i = 0; i < 100; i++) {
 					let x = Math.random() * this.width;
 					let y = Math.random() * this.height;
 					let xa = Math.random() * 2 - 1;
@@ -117,22 +117,21 @@
 			};
 			this.mousemove()
 		},
-		mounted(){
+		mounted() {
 			setInterval(() => {
 				this.setCanvas()
-			},25)
-			
+			}, 25)
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-canvas{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(top,#265DE8, #0A44D6);
-}
+	canvas {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #000;
+	}
 </style>

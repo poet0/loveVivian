@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<star />
+		<particle2 />
+		
 	</div>
 </template>
 

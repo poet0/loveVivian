@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<canvas id="canvas" class="canvas"></canvas>
+		<canvas ref="canvas" :width="width" :height="height" class="canvas"></canvas>
 		<div class="city"></div>
 		<div class="moon"></div>
 	</div>
@@ -14,56 +14,68 @@
 	export default {
 		name: "star",
 		data() {
-			return {}
+			return {
+				width: 0,
+				height: 0,
+				moon: '',
+				stars: '',
+				meteors: [],
+				count: 0,
+				creatMeteor: ''
+			}
 		},
-		methods: {},
-		created() {
-			
-		},
-		mounted(){
-			let canvas = document.getElementById('canvas'),
-				ctx = canvas.getContext('2d'),
-				width = window.innerWidth,
-				height = window.innerHeight,
-				//实例化月亮和星星。流星是随机时间生成，所以只初始化数组
-				moon = new Moon(ctx, width, height),
-				stars = new Stars(ctx, width, height, 200),
-				meteors = [],
-				count = 0
-			
-			canvas.width = width;
-			canvas.height = height;
-			
-			const meteorGenerator = ()=> {
+		methods: {
+			setCanvas(){
+				let canvas = this.$refs.canvas,
+					ctx = canvas.getContext('2d');
+					//实例化月亮和星星。流星是随机时间生成，所以只初始化数组
+					this.moon = new Moon(ctx, this.width, this.height);
+					this.stars = new Stars(ctx, this.width, this.height, 200);
+					this.meteors = [];
+				this.meteorGenerator(ctx);
+				this.frame()
+			},
+			resize(){
+				this.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				this.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+			},
+			meteorGenerator(ctx){
 				//x位置偏移，以免经过月亮
-				let x = Math.random() * width + 800
-				meteors.push(new Meteor(ctx, x, height))
+				let x = Math.random() * this.width + 800;
+				this.meteors.push(new Meteor(ctx, x, this.height));
 				
 				//每隔随机时间，生成新流星
-				setTimeout(()=> {
-					meteorGenerator()
-					
+				this.creatMeteor = setTimeout(()=> {
+					this.meteorGenerator(ctx)
 				}, Math.random() * 2000)
-			}
-			
-			const frame = ()=>{
-				count++
-				count % 10 == 0 && stars.blink()
-				moon.draw()
-				stars.draw()
+			},
+			frame(){
+				this.count++;
+				this.count % 10 == 0 && this.stars.blink();
+				this.moon.draw();
+				this.stars.draw();
 				
-				meteors.forEach((meteor, index, arr)=> {
+				this.meteors.forEach((meteor, index, arr)=> {
 					//如果流星离开视野之内，销毁流星实例，回收内存
 					if (meteor.flow()) {
 						meteor.draw()
 					} else {
 						arr.splice(index, 1)
 					}
-				})
-				requestAnimationFrame(frame)
+				});
+				requestAnimationFrame(this.frame)
 			}
-			meteorGenerator()
-			frame()
+		},
+		created() {
+			this.resize();
+			window.onresize = () => {
+				this.resize();
+				clearTimeout(this.creatMeteor);
+				this.setCanvas()
+			}
+		},
+		mounted(){
+			this.setCanvas()
 		}
 	}
 </script>

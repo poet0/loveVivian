@@ -1,6 +1,9 @@
 <template>
-	<div class="wrap-box">
-	</div>
+	<el-container>
+		<el-header></el-header>
+		<el-main></el-main>
+		<el-footer></el-footer>
+	</el-container>
 </template>
 
 <script>
@@ -17,9 +20,16 @@
 </script>
 
 <style lang="scss" scoped>
-	.wrap-box {
-		width: 885px;
-		height: 1000px;
-		margin: 0 auto;
+	header {
+		background-color: #000000;
+	}
+	
+	main {
+		height: 500px;
+		background-color: #ffff00;
+	}
+	
+	footer{
+		background-color: #ff0000;
 	}
 </style>

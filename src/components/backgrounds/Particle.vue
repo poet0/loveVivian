@@ -132,6 +132,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: #000;
+		background-color: #0d1953;
 	}
 </style>

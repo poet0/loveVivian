@@ -1,7 +1,6 @@
 <template>
-	<div style="background-color: #0d1953;">
+	<div>
 		<bgCanvas />
-
 	</div>
 </template>
 

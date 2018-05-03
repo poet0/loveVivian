@@ -6,6 +6,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+import 'vue2-animate/dist/vue2-animate.min.css';
+
 import Diary from './Diary'
 import router from './router'
 

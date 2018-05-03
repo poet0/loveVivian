@@ -2,6 +2,9 @@
 
 > A project made by Vivian's lover.
 
+#引用
+vue2-animate: https://www.npmjs.com/package/vue2-animate
+
 ## Build Setup
 
 ``` bash

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/Login'
-import Home from '@/views/Home'
+
+//首页不做懒加载，但是还没确定首页是哪个
 
 Vue.use(Router)
 
@@ -10,11 +10,11 @@ export default new Router({
 		{
 			path: '/',
 			name: 'login',
-			component: Login
+			component: resolve => require(['@/views/Login'], resolve)
 		}, {
 			path: '/home',
 			name: 'home',
-			component: Home
+			component: resolve => require(['@/views/Home'], resolve)
 		}
 	]
 })

@@ -7,20 +7,18 @@
 <script>
 	export default {
 		name: 'Diary',
-		data(){
-			return{
-			
-			}
+		data() {
+			return {}
 		}
 	}
 </script>
 
 <style lang="scss">
-    @import "../static/scss/normalize";
+	@import "../static/scss/normalize";
 </style>
 
 <style lang="scss" scoped>
-	div{
+	div {
 		width: 100%;
 		overflow: hidden;
 	}
